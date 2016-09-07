@@ -6,7 +6,7 @@
 
 namespace Core;
 
-class Container
+class Container implements \ArrayAccess
 {
     /**
      * All dependencies are stored in this property
@@ -53,4 +53,12 @@ class Container
             return $this->cached[$offset];
         }
     }
+
+    public function offsetSet($offset, $value) {}
+
+    public function offsetGet($offset) {}
+
+    public function offsetExists($offset) {}
+
+    public function offsetUnset($offset) {}
 }
