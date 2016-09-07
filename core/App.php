@@ -85,4 +85,19 @@ class App
 
         return $this;
     }
+
+    /**
+     * Create a group of routes
+     * @param  string   $route 
+     * @param  callable $action 
+     * @return self
+     */
+    public function group(string $route, callable $action)
+    {
+        $this->container['router']->setRouteModifier($route);
+        call_user_func($action);
+        $this->container['router']->setRouteModifier('');
+
+        return $this;
+    }
 }
