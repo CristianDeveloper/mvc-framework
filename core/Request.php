@@ -1,7 +1,7 @@
 <?php 
 
 /**
- * Request class - Acts like a representation of the HTTP Request
+ * Request class - Acts like a very simple representation of the HTTP Request
  */
 
 namespace Core;
@@ -31,4 +31,12 @@ class Request
      * @var array
      */
     protected $files = [];
+
+    /**
+     * Load class dependencies
+     */
+    public function __construct()
+    {
+        $this->createFromGlobals();
+    }
 }
