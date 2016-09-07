@@ -17,14 +17,17 @@ class App
     /**
      * Load class dependencies
      */
-    public function __construct()
+    public function __construct(array $settings = [])
     {
         $this->container = new Container;
+
+        $this->container['settings'] = $settings;
 
         // load components
         $this->setRequest();
         $this->setRouter();
         $this->setMiddleware();
+
     }
 
     /**
@@ -54,7 +57,7 @@ class App
         $container = $this->container;
 
         $this->container['router'] = function () use ($container){
-            $uri = str_replace('/mvc-framework/public', '', $container['request']->getUri());
+            $uri = str_replace($this->container['settings']['basePath'], '', $container['request']->getUri());
             $method = $container['request']->getMethod();
 
             return new \Core\Router($uri, $method);
@@ -151,8 +154,7 @@ class App
      */
     public function run()
     {
-
-        $uri = str_replace('/mvc-framework/public', '', $this->container['request']->getUri());
+        $uri = str_replace($this->container['settings']['basePath'], '', $this->container['request']->getUri());
 
         $this->container['middleware']->callGlobalMiddlewares();
         $this->container['middleware']->callBeforeMiddleware($uri);
