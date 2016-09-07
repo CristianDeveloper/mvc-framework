@@ -32,9 +32,25 @@ class Container
 
     /**
      *  Get an item from the $items property 
-     *  If the item is found, cache that item and store it in the $cached property
+     *  If the item is found, remove it from $items,
+     *  store it in the $cached property
      * @param  string $offset
      * @return mixed
      */
-    public function get(string $offset) {}
+    public function get(string $offset) 
+    {
+        if (isset($this->cached[$offset])) {
+            return $this->cached[$offset];
+        }
+
+        if (isset($this->items[$offset])) {
+            if (is_callable($this->items[$offset])) {
+                $this->cached[$offset] = call_user_func($this->items[$offset]);
+            } else {
+                $this->cached[$offset] = $this->items[$offset];
+            }
+
+            return $this->cached[$offset];
+        }
+    }
 }
