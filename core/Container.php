@@ -43,12 +43,14 @@ class Container implements \ArrayAccess
             return $this->cached[$offset];
         }
 
-        if (isset($this->items[$offset])) {
+        if ($this->offsetExists($offset)) {
             if (is_callable($this->items[$offset])) {
                 $this->cached[$offset] = call_user_func($this->items[$offset]);
             } else {
                 $this->cached[$offset] = $this->items[$offset];
             }
+
+            $this->offsetUnset($offset);
 
             return $this->cached[$offset];
         }
