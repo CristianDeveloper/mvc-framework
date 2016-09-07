@@ -125,4 +125,24 @@ class App
 
         return $this;
     }
+
+    /**
+     * Add a route middleware
+     * @param  array  $middleware
+     */
+    public function middleware(array $middleware = []) 
+    {
+        $route = $this->container['router']->getLastRoute();
+
+        $this->container['middleware']->addMiddleware($route, $middleware);
+    }
+
+    /**
+     * Add a global middleware
+     * @param array $middleware
+     */
+    public function add(array $middleware = [])
+    {
+        $this->container['middleware']->addGlobalMiddleware($middleware);
+    }
 }
