@@ -72,5 +72,49 @@ class Router
         return $this;
     }
 
+    /**
+     * Get last added route
+     * @return string
+     */
+    protected function getLastRoute()
+    {
+        end($this->routes);
+        $route = key($this->routes);
+
+        return $this->route;
+    }
+
+    /**
+     * Set the name of the last route
+     * @param string $name 
+     */
+    public function setRouteName(string $name)
+    {
+        $route = $this->getLastRoute();
+
+        $this->routesName[$name] = $route;
+    }
+
+    /**
+     * Return a route by using its name
+     * @param  string $name
+     * @return mixed
+     */
+    public function getRouteByName(string $name)
+    {
+        if (isset($this->routeNames[$name])) {
+            return $this->routeNames[$name];
+        }
+    }
+
+    /**
+     * Set a segment of the route URI
+     * @param string $routeModifier
+     */
+    public function setRouteModifier(string $routeModifier)
+    {
+        $this->routeModifier = $routeModifier;
+    }
+
     
 }
