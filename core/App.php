@@ -59,4 +59,30 @@ class App
             return new Router($uri, $method);
         };
     }
+
+    /**
+     * Create a route that answers to a HTTP GET request
+     * @param  string $route 
+     * @param  mixed $action
+     * @return self
+     */
+    public function get(string $route, $action) 
+    {
+        $this->container['router']->addRoute($route, $action, ['GET']);
+
+        return $this;
+    }
+
+    /**
+     * Create a route that answers to a HTTP POST request
+     * @param  string $route 
+     * @param  mixed $action
+     * @return self
+     */
+    public function post(string $route, $action) 
+    {
+        $this->container['router']->addRoute($route, $action, ['POST']);
+
+        return $this;
+    }
 }
