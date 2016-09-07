@@ -30,5 +30,5 @@ class Request
      * Stores the content of the $_FILES superglobal variable
      * @var array
      */
-    protected $file = []
+    protected $files = [];
 }
