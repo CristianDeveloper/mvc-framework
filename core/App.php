@@ -20,6 +20,9 @@ class App
     public function __construct()
     {
         $this->container = new Container;
+
+        // load components
+        $this->setRequest();
     }
 
     /**
@@ -29,5 +32,15 @@ class App
     public function getContainer()
     {
         return $this->container;
+    }
+
+    /**
+     * Set the \Core\Request object into the container
+     */
+    protected function setRequest()
+    {
+        $this->container['request'] = function () {
+            return new Request();
+        };
     }
 }
