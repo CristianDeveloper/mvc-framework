@@ -25,7 +25,10 @@ class Container
      * @param string $offset
      * @param mixed $value
      */
-    public function add(string $offset, $value) {}
+    public function add(string $offset, $value) 
+    {
+        $this->items[$offset] = $value;
+    }
 
     /**
      *  Get an item from the $items property 
