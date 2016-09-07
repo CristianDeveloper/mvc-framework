@@ -51,4 +51,88 @@ class Request
         $this->query = $_GET;
         $this->files = $_FILES;
     }
+
+    /**
+     * Return an item from the $server property
+     * @param  string $offset
+     * @return mixed
+     */
+    public function get(string $offset)
+    {
+        if (isset($this->server[$offset])) {
+            return $this->server[$offset];
+        }
+    }
+
+    /**
+     * Return the current HTTP method
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->get('REQUEST_METHOD');
+    }
+
+    /**
+     * Return the request URI without the query string
+     * @return string
+     */
+    public function getUri()
+    {
+        return str_replace('?' . $this->get('QUERY_STRING'), '', $this->get('REQUEST_URI'));
+    }
+
+    /**
+     * Returns the URL protocol used
+     * @return string
+     */
+    public function getProtocol()
+    {
+        $protocol = $this->get('HTTPS');
+
+        return isset($protocol) ? $protocol : "http";
+    }
+
+    /**
+     * Get the URL hostname
+     * @return string
+     */
+    public function getHost()
+    {
+        return $this->get('HTTP_HOST');
+    }
+
+    /**
+     * Return an item from the $query property
+     * @param  string $offset 
+     * @return mixed
+     */
+    public function query(string $offset)
+    {
+        if (isset($this->query[$offset])) {
+            return $this->query[$offset];
+        }
+    }
+
+    /**
+     * Return an item from the $post property
+     * @param  string $offset 
+     * @return mixed
+     */
+    public function post(string $offset)
+    {
+        if (isset($this->post[$offset])) {
+            return $this->post[$offset];
+        }
+    }
+
+    /**
+     * Return the entire content of the $files property
+     * @return array
+     */
+    public function files()
+    {
+        return $this->files;
+    }
+
 }
