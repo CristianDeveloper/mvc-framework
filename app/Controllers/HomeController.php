@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
-class HomeController
+class HomeController extends Controller
 {
     public function home()
     {
-        return 'Home';
+        $this->container['name'] = 'cata';
+
+        return $this->name;
     }
 }
