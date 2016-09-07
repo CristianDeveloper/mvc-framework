@@ -100,4 +100,16 @@ class App
 
         return $this;
     }
+
+    /**
+     * Set a name for the last added route
+     * @param string $name
+     * @return self
+     */
+    public function setName(string $name)
+    {
+        $this->container['router']->setRouteName($name);
+
+        return $this;
+    }
 }
