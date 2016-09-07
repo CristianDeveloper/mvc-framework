@@ -14,8 +14,20 @@ class App
      */
     protected $container;
 
+    /**
+     * Load class dependencies
+     */
     public function __construct()
     {
         $this->container = new Container;
+    }
+
+    /**
+     * Returns the object \Core\Container
+     * @return object
+     */
+    public function getContainer()
+    {
+        return $this->container;
     }
 }
