@@ -76,7 +76,7 @@ class Router
      * Get last added route
      * @return string
      */
-    protected function getLastRoute()
+    public function getLastRoute()
     {
         end($this->routes);
         $route = key($this->routes);
