@@ -23,6 +23,7 @@ class App
 
         // load components
         $this->setRequest();
+        $this->setRouter();
     }
 
     /**
@@ -41,6 +42,21 @@ class App
     {
         $this->container['request'] = function () {
             return new Request();
+        };
+    }
+
+     /**
+     * Set the \Core\Router object into the container
+     */
+    protected function setRouter()
+    {
+        $container = $this->container;
+
+        $this->container['router'] = function () use ($container){
+            $uri = str_replace('/mvc-framework/public', '', $container['request']->getUri());
+            $method = $container['request']->getMethod();
+
+            return new Router($uri, $method);
         };
     }
 }
