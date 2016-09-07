@@ -55,5 +55,22 @@ class Router
         $this->method = $method;
     }
 
+    /**
+     *  Add a new route in the $routes property
+     *  and store methods for each route in the $methods property
+     * @param string $route  
+     * @param mixed $action 
+     * @param array  $methods 
+     * @return self 
+     */
+    public function addRoute(string $route, $action, array $methods = [])
+    {
+        $route = $this->routeModifier . $route;
+        $this->routes[$route] = $action;
+        $this->methods[$route] = $methods;
+
+        return $this;
+    }
+
     
 }
