@@ -129,7 +129,7 @@ class Router
         }
 
         // check if the current HTTP method matches one of the route's methods
-        if (in_array($this->method, $this->methods[$this->uri])) {
+        if (!in_array($this->method, $this->methods[$this->uri])) {
             throw new MethodNotAllowedException("The {$this->method} is not allowed.", 405);
         }
 
