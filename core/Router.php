@@ -116,5 +116,32 @@ class Router
         $this->routeModifier = $routeModifier;
     }
 
-    
+    /**
+     *  Call the specific action based on the URI
+     * @param  \Core\Container|null $container
+     * @return mixed
+     */
+    public function dispatch(\Core\Container $container = null)
+    {
+        // check if the URI match one of the routes
+        if (!isset($this->routes[$this->uri])) {
+            throw new RouteNotFoundException("The {$this->uri} route was not found.", 404);
+        }
+
+        // check if the current HTTP method matches one of the route's methods
+        if (in_array($this->method, $this->methods[$this->uri])) {
+            throw new MethodNotAllowedException("The {$this->method} is not allowed.", 405);
+        }
+
+        if (is_array($this->routes[$this->uri])) {
+            $controller = new $this->routes[$this->uri][0]($container);
+            echo $controller->{$this->routes[$this->uri][1]}();
+
+            return;
+        }
+
+        echo call_user_func($this->routes[$this->uri], [$container]);
+
+        return;
+    }
 }
