@@ -39,4 +39,16 @@ class Request
     {
         $this->createFromGlobals();
     }
+
+    /**
+     * Create a simple representation of the HTTP request
+     * @return [type] [description]
+     */
+    protected function createFromGlobals()
+    {
+        $this->server = $_SERVER;
+        $this->post = $_POST;
+        $this->query = $_GET;
+        $this->files = $_FILES;
+    }
 }
