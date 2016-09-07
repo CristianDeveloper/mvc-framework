@@ -145,4 +145,18 @@ class App
     {
         $this->container['middleware']->addGlobalMiddleware($middleware);
     }
+
+    /**
+     * Run the application
+     */
+    public function run()
+    {
+
+        $uri = str_replace('/mvc-framework/public', '', $this->container['request']->getUri());
+
+        $this->container['middleware']->callGlobalMiddlewares();
+        $this->container['middleware']->callBeforeMiddleware($uri);
+        $this->container['router']->dispatch($this->container);
+
+    }
 }
