@@ -81,7 +81,7 @@ class Router
         end($this->routes);
         $route = key($this->routes);
 
-        return $this->route;
+        return $route;
     }
 
     /**
