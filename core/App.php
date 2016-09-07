@@ -24,6 +24,7 @@ class App
         // load components
         $this->setRequest();
         $this->setRouter();
+        $this->setMiddleware();
     }
 
     /**
@@ -41,7 +42,7 @@ class App
     protected function setRequest()
     {
         $this->container['request'] = function () {
-            return new Request();
+            return new \Core\Request();
         };
     }
 
@@ -56,7 +57,19 @@ class App
             $uri = str_replace('/mvc-framework/public', '', $container['request']->getUri());
             $method = $container['request']->getMethod();
 
-            return new Router($uri, $method);
+            return new \Core\Router($uri, $method);
+        };
+    }
+
+        /**
+     * Set the \Core\Middleware component
+     */
+    public function setMiddleware()
+    {
+        $container = $this->container;
+
+        $this->container['middleware'] = function () use ($container){
+            return new \Core\Middleware($container);
         };
     }
 
