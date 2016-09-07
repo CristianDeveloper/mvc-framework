@@ -44,5 +44,16 @@ class Router
      */
     protected $routeModifier = '';
 
+    /**
+     *  Load class dependencies
+     * @param string $uri    [description]
+     * @param string $method [description]
+     */
+    public function __construct(string $uri, string $method)
+    {
+        $this->uri = $uri;
+        $this->method = $method;
+    }
+
     
 }
