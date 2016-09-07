@@ -8,5 +8,14 @@ namespace Core;
 
 class App
 {
-    
+    /**
+     * Contains an instance of the \Core\Container
+     * @var object
+     */
+    protected $container;
+
+    public function __construct()
+    {
+        $this->container = new Container;
+    }
 }
